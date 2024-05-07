@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("calculator")
 public class CalculatorController {
 
+    private final ControllerService controllerService;
+
+    public CalculatorController(ControllerService controllerService) {
+        this.controllerService = controllerService;
+    }
+
 
 
     @GetMapping
@@ -21,7 +27,7 @@ public class CalculatorController {
             return "Забыли указать число..";
         }
 
-        return num1 + " + " + num2 + " = " + (num1+num2);
+        return num1 + " + " + num2 + " = " + controllerService.plus(num1,num2);
     }
 
     @GetMapping("minus")
@@ -30,7 +36,7 @@ public class CalculatorController {
             return "Забыли указать число..";
         }
 
-        return num1 + " - " + num2 + " = " + (num1-num2);
+        return num1 + " - " + num2 + " = " + controllerService.minus(num1,num2);
     }
 
     @GetMapping("multiply")
@@ -39,7 +45,7 @@ public class CalculatorController {
             return "Забыли указать число..";
         }
 
-        return num1 + " * " + num2 + " = " + (num1*num2);
+        return num1 + " * " + num2 + " = " + controllerService.multiply(num1,num2);
     }
 
     @GetMapping("divide")
@@ -52,7 +58,7 @@ public class CalculatorController {
             return "На ноль делить нельзя!";
         }
 
-        return num1 + " / " + num2+ " = " + (num1/num2);
+        return num1 + " / " + num2+ " = " + controllerService.divide(num1,num2);
     }
 
 }
